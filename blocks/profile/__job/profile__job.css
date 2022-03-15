@@ -1,0 +1,15 @@
+.profile__job {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 7px 0 0 0;
+}
+
+@media (min-width: 890px) {
+    .profile__job {
+        font-size: 18px;
+        line-height: 22px;
+        text-align: left;
+        margin-top: 10px;
+    }
+}

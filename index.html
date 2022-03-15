@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="header__logo"></div>
+        </header>
+        <main>
+            <section class="profile">
+                <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+                <div class="profile__info">
+                    <p class="profile__name">Жак-Ив Кусто</p>
+                    <p class="profile__job">Исследователь океана</p>
+                    <button class="profile__edit-button"></button>
+                </div>
+                <button class="profile__add-button"></button>                
+            </section>
+            <section class="elements">
+                <ul class="elements__container">
+                    <li class="elements__element">
+                        <img class="elements__image" src="./images/karachaevck.png" alt="разрушенное здание в горах">
+                        <div class="elements__content">
+                            <p class="elements__place">Карачаевск</p>
+                            <div class="elements__like"></div>
+                        </div>
+                    </li>
+                    <li class="elements__element">
+                        <img class="elements__image" src="./images/elbrus.png" alt="вид горы Эльбрус из далека">
+                        <div class="elements__content">
+                            <p class="elements__place">Гора Эльбрус</p>
+                            <div class="elements__like"></div>
+                        </div>
+                    </li>
+                    <li class="elements__element">
+                        <img class="elements__image" src="./images/dombay.png" alt="горы домбая">
+                        <div class="elements__content">
+                            <p class="elements__place">Домбай</p>
+                            <div class="elements__like"></div>
+                        </div>
+                    </li>
+                    <li class="elements__element">
+                        <img class="elements__image" src="./images/elbrus.png" alt="вид горы Эльбрус из далека">
+                        <div class="elements__content">
+                            <p class="elements__place">Гора Эльбрус</p>
+                            <div class="elements__like"></div>
+                        </div>
+                    </li>
+                    <li class="elements__element">
+                        <img class="elements__image" src="./images/dombay.png" alt="горы домбая">
+                        <div class="elements__content">
+                            <p class="elements__place">Домбай</p>
+                            <div class="elements__like"></div>
+                        </div>
+                    </li>
+                    <li class="elements__element">
+                        <img class="elements__image" src="./images/karachaevck.png" alt="разрушенное здание в горах">
+                        <div class="elements__content">
+                            <p class="elements__place">Карачаево-Черкессия</p>
+                            <div class="elements__like"></div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <footer class="footer">
+            © 2020 Mesto Russia
+        </footer>
+        <section class="popup">
+            <form class="popup__container">
+                <h1 class="popup__heading">Редактировать профиль</h1>
+                <input class="popup__input popup__name" type="text" name="nameInput">
+                <input class="popup__input popup__job" type="text" name="jobInput">
+                <button class="popup__submit-button">Сохранить</button>
+                <button class="popup-close-button"></button>
+            </form>
+        </section>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>

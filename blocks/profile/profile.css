@@ -1,0 +1,15 @@
+.profile {
+    width: calc(100% - 19px*2);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
+
+@media (min-width: 890px) {
+    .profile {
+        flex-direction: row;
+        width: 880px;
+        padding: 40px 0 50px 0;
+    }
+}
