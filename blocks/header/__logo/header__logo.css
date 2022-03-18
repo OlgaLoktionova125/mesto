@@ -1,6 +1,7 @@
 .header__logo {
     width: 103.74px;
     height: 24.4px;
+    display: block;
     background-image: url(../../../images/logo.svg);
     background-size: contain;
     background-repeat: no-repeat;
@@ -11,6 +12,10 @@
     .header__logo {
         width: 142px;
         height: 33px;
-        margin: 0;
+        margin-left: 0;
     }
+}
+
+.header__logo:hover {
+    opacity: 0.5;
 }
