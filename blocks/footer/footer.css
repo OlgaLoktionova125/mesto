@@ -7,7 +7,7 @@
 
 @media (min-width: 890px) {
     .footer {
-        width: 880px;
+        max-width: 880px;
         padding: 66px 0 60px 0;
         font-size: 18px;
         line-height: 22px;

@@ -9,7 +9,7 @@
 @media (min-width: 890px) {
     .profile {
         flex-direction: row;
-        width: 880px;
+        max-width: 880px;
         padding: 40px 0 50px 0;
         align-items: center;
     }
