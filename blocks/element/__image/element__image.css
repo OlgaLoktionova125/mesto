@@ -1,7 +1,9 @@
 .element__image {
-    max-width: 282px;
+    width: 282px;
     height: 282px;
     border: none;
     display: block;
-    object-fit: cover;
+    object-fit: cover; 
+    object-position: center;   
+    cursor: pointer;
 }

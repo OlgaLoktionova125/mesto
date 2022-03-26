@@ -3,4 +3,5 @@
     border-radius: 3%;
     overflow: hidden;
     background-color: #fff;
+    position: relative;
 }
