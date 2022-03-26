@@ -3,7 +3,7 @@
     height: 282px;
     border: none;
     display: block;
-    object-fit: cover; 
-    object-position: center;   
+    object-fit: cover;
+    object-position: center;
     cursor: pointer;
 }
