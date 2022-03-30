@@ -8,22 +8,22 @@
 </head>
 <body class="body">
     <div class="page">
-        <header class="header">            
-            <a class="header__logo" href="./index.html"></a>            
+        <header class="header">
+            <a class="header__logo" href="./index.html"></a>
         </header>
-        <main>
+        <main class="main">
             <section class="profile">
                 <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button aria-label="редактировать" class="profile__edit-button" type="button"></button>
-                    <p class="profile__job">Исследователь океана</p>                    
+                    <p class="profile__job">Исследователь океана</p>
                 </div>
-                <button aria-label="добавить" class="profile__add-button" type="button"></button>                
+                <button aria-label="добавить" class="profile__add-button" type="button"></button>
             </section>
             <section class="elements">
                 <ul class="elements__container">
-                    
+
                 </ul>
             </section>
         </main>
@@ -46,8 +46,8 @@
                 <h2 class="popup__heading">Новое место</h2>
                 <button aria-label="закрыть" class="popup__close-button" type="button" id="addCloseButton"></button>
                 <form class="popup__form" name="popupForm" id="addPopupForm">
-                    <input class="popup__input popup__input_type_place" type="text" name="placeInput">
-                    <input class="popup__input popup__input_type_image" type="text" name="imageInput">
+                    <input class="popup__input popup__input_type_place" type="text" name="placeInput" placeholder="Название">
+                    <input class="popup__input popup__input_type_image" type="text" name="imageInput" placeholder="Ссылка на картинку">
                     <button aria-label="сохранить" class="popup__submit-button" type="submit">Создать</button>
                 </form>
             </div>
@@ -66,7 +66,7 @@
             <div class="element__content">
                 <h2 class="element__place"></h2>
                 <button aria-label="нравится" class="element__like" type="button"></button>
-            </div>            
+            </div>
         </li>
     </template>
     <script src="./scripts/index.js"></script>
