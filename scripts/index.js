@@ -14,9 +14,11 @@ const add = document.querySelector('#add');
 const addPopupForm = document.querySelector('#addPopupForm');
 const placeInput = addPopupForm.querySelector('.popup__input_type_place');
 const imageInput = addPopupForm.querySelector('.popup__input_type_image');
-const popupContent = document.querySelector('.popup__content');
+const popupImg = document.querySelector('.popup__img');
 const popupText = document.querySelector('.popup__text');
 const popupImageCloseButton = document.querySelector('#popupImageCloseButton');
+const popupImage = document.querySelector('#popupImage');
+const popups = Array.from(document.querySelectorAll('.popup'));
 const initialCards = [
     {
       name: 'Архыз',
@@ -52,34 +54,46 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
 
+popups.forEach(popup => {
+  document.addEventListener('keydown', evt => {
+    if(evt.key === 'Escape') {
+      closePopup(popup);
+    };
+  });
+  popup.addEventListener('click', evt => {
+    if(evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    };
+  });
+});
+
 function elementLikeCallback (evt) {
   evt.target.classList.toggle('element__like_active');
+};
+
+function openPopupImage (obj) {
+  popupImg.src = obj.link;
+  popupText.textContent = obj.name;
+  openPopup(popupImage);  
+};
+
+function cardRemove(card) {
+  card.remove();
 };
 
 function addCard(obj) {
     const card = elementTemplate.querySelector('.element').cloneNode(true);
     const cardImage = card.querySelector('.element__image');
-    const cardPlace = card.querySelector('.element__place');
-    const popupImage = document.querySelector('#popupImage');
-
-    function openPopupImage () {
-      popupContent.style.backgroundImage = `url(${cardImage.src})`;
-      popupText.textContent = cardPlace.textContent;
-      openPopup(popupImage);
-    };
-
-    function cardRemove() {
-      card.remove();
-    };
+    const cardPlace = card.querySelector('.element__place');    
 
     cardImage.src = obj.link;
     cardPlace.textContent = obj.name;
 
     card.querySelector('.element__like').addEventListener('click', elementLikeCallback);
 
-    cardImage.addEventListener('click', openPopupImage);       
+    cardImage.addEventListener('click', () => openPopupImage(obj));     
 
-    card.querySelector('.element__trash').addEventListener('click', cardRemove);
+    card.querySelector('.element__trash').addEventListener('click', () => cardRemove(card));
 
     return card;    
 };
@@ -103,18 +117,6 @@ function openEditPopup () {
 
 editButton.addEventListener('click', openEditPopup);
 
-function clearNameInput () {
-  nameInput.value = '';
-};
-
-nameInput.addEventListener('click', clearNameInput);
-
-function clearJobInput () {
-  jobInput.value = '';
-};
-
-jobInput.addEventListener('click', clearJobInput);
-
 function closeEditPopup () {
   closePopup(edit);
 };
@@ -136,19 +138,9 @@ function openAddPopup () {
 
 addButton.addEventListener('click', openAddPopup);
 
-function clearPlaceInput () {
-  placeInput.value = '';
-};
-
-placeInput.addEventListener('click', clearPlaceInput);
-
-function clearImageInput () {
-  imageInput.value = '';
-};
-
-imageInput.addEventListener('click', clearImageInput);
-
 function closeAddPopup () {
+  placeInput.value = '';
+  imageInput.value = '';
   closePopup(add);
 };
 
