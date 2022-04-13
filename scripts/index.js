@@ -46,9 +46,9 @@ const initialCards = [
   }
 ];
 
-function closePopupEsc(evt) {
-  const popup = document.querySelector('.popup_opened');
+function closePopupEsc(evt) {  
   if(evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   };
 };
