@@ -1,41 +1,7 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
-
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
-const validationObj = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
+import {initialCards} from './initialCards.js';
+import {validationObj} from './validationObj.js';
 
 const elementsContainer = document.querySelector('.elements__container');
 const elementTemplate = document.querySelector('#element-template').content;
@@ -88,22 +54,21 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupEsc);  
 };
 
-function openPopupImage (obj) {
+function openPopupImage(obj) {
   popupImg.src = obj.link;
   popupImg.alt = obj.name;
   popupText.textContent = obj.name;
   openPopup(popupImage);  
 };
 
-function addCard(obj) {
-  const card = new Card(obj, '#element-template');
-  const cardElement = card.generateCard();
-  cardElement.querySelector('.element__image').addEventListener('click', ()=> openPopupImage(obj));
+function createCard(obj) {
+  const card = new Card(obj, '#element-template', openPopupImage);
+  const cardElement = card.generateCard();  
   return cardElement;
 }
 
 initialCards.forEach(item => {
-  const card = addCard(item);
+  const card = createCard(item);
   elementsContainer.append(card);
 });
 
@@ -117,6 +82,7 @@ function openEditPopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfileEdit);
+  addPopupFormValidator.toggleButtonState();
 };
 
 editButton.addEventListener('click', openEditPopup);
@@ -138,18 +104,14 @@ editPopupForm.addEventListener('submit', editFormSubmitHandler);
 
 function openAddPopup () {
   openPopup(popupAddCard);
+  addPopupFormValidator.toggleButtonState();
 };
 
 addButton.addEventListener('click', openAddPopup);
 
-function addInactiveButtonClass() {
-  addPopupForm.querySelector('.popup__submit-button').classList.add('popup__submit-button_disabled');
-};
-
 function closeAddPopup() {  
   closePopup(popupAddCard);
-  addPopupForm.reset();
-  addInactiveButtonClass();
+  addPopupForm.reset();  
 };
 
 addCloseButton.addEventListener('click', closeAddPopup);
@@ -160,9 +122,8 @@ function addFormSubmitHandler(evt) {
     name: placeInput.value,
     link: imageInput.value
   };
-  const card = addCard(newCard);
+  const card = createCard(newCard);
   elementsContainer.prepend(card);
-  addInactiveButtonClass();
   closePopup(popupAddCard);
   addPopupForm.reset();  
 };

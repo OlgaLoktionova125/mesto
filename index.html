@@ -34,10 +34,10 @@
             <div class="popup__container">
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <button aria-label="закрыть" class="popup__close-button" type="button" id="editCloseButton"></button>
-                <form class="popup__form" name="popupForm" id="editPopupForm" novalidate>
-                    <input class="popup__input popup__input_type_name" type="text" id="name-input" minlength="2" maxlength="40" required>
+                <form class="popup__form" name="editPopupForm" id="editPopupForm" novalidate>
+                    <input class="popup__input popup__input_type_name" type="text" id="name-input" minlength="2" maxlength="40" placeholder="Имя" required>
                     <span class="popup__input-error name-input-error"></span>
-                    <input class="popup__input popup__input_type_job" type="text" id="job-input" minlength="2" maxlength="200" required>
+                    <input class="popup__input popup__input_type_job" type="text" id="job-input" minlength="2" maxlength="200" placeholder="Вид деятельности" required>
                     <span class="popup__input-error job-input-error"></span>
                     <button aria-label="сохранить" class="popup__submit-button" type="submit">Сохранить</button>
                 </form>
@@ -47,7 +47,7 @@
             <div class="popup__container">
                 <h2 class="popup__heading">Новое место</h2>
                 <button aria-label="закрыть" class="popup__close-button" type="button" id="addCloseButton"></button>
-                <form class="popup__form" name="popupForm" id="addPopupForm">
+                <form class="popup__form" name="addPopupForm" id="addPopupForm">
                     <input class="popup__input popup__input_type_place" type="text" id="place-input" placeholder="Название" minlength="2" maxlength="30" required>
                     <span class="popup__input-error place-input-error"></span>
                     <input class="popup__input popup__input_type_image" type="url" id="image-input" placeholder="Ссылка на картинку" required>
