@@ -82,7 +82,7 @@ function openEditPopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfileEdit);
-  addPopupFormValidator.toggleButtonState();
+  editPopupFormValidator.toggleButtonState();
 };
 
 editButton.addEventListener('click', openEditPopup);
