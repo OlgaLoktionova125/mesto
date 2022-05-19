@@ -2,8 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>Место</title>
 </head>
 <body class="body">
@@ -13,7 +12,7 @@
         </header>
         <main class="main">
             <section class="profile">
-                <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+                <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button aria-label="редактировать" class="profile__edit-button" type="button"></button>
@@ -35,9 +34,9 @@
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <button aria-label="закрыть" class="popup__close-button" type="button" id="editCloseButton"></button>
                 <form class="popup__form" name="editPopupForm" id="editPopupForm" novalidate>
-                    <input class="popup__input popup__input_type_name" type="text" id="name-input" minlength="2" maxlength="40" placeholder="Имя" required>
+                    <input class="popup__input popup__input_type_name" type="text" id="name-input" minlength="2" maxlength="40" placeholder="Имя" required name="userName">
                     <span class="popup__input-error name-input-error"></span>
-                    <input class="popup__input popup__input_type_job" type="text" id="job-input" minlength="2" maxlength="200" placeholder="Вид деятельности" required>
+                    <input class="popup__input popup__input_type_job" type="text" id="job-input" minlength="2" maxlength="200" placeholder="Вид деятельности" required name="userJob">
                     <span class="popup__input-error job-input-error"></span>
                     <button aria-label="сохранить" class="popup__submit-button" type="submit">Сохранить</button>
                 </form>
@@ -48,9 +47,9 @@
                 <h2 class="popup__heading">Новое место</h2>
                 <button aria-label="закрыть" class="popup__close-button" type="button" id="addCloseButton"></button>
                 <form class="popup__form" name="addPopupForm" id="addPopupForm">
-                    <input class="popup__input popup__input_type_place" type="text" id="place-input" placeholder="Название" minlength="2" maxlength="30" required>
+                    <input class="popup__input popup__input_type_place" type="text" id="place-input" placeholder="Название" minlength="2" maxlength="30" required name="name">
                     <span class="popup__input-error place-input-error"></span>
-                    <input class="popup__input popup__input_type_image" type="url" id="image-input" placeholder="Ссылка на картинку" required>
+                    <input class="popup__input popup__input_type_image" type="url" id="image-input" placeholder="Ссылка на картинку" required name="link">
                     <span class="popup__input-error image-input-error"></span>
                     <button aria-label="сохранить" class="popup__submit-button" type="submit">Создать</button>
                 </form>
@@ -73,7 +72,6 @@
                 <button aria-label="нравится" class="element__like" type="button"></button>
             </div>
         </li>
-    </template>
-    <script type="module" src="./scripts/index.js"></script>    
+    </template>        
 </body>
 </html>
