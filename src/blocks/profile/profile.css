@@ -3,7 +3,7 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;    
+    justify-content: center;       
 }
 
 @media (min-width: 890px) {

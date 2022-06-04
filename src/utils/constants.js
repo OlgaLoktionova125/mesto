@@ -4,3 +4,6 @@ export const nameInput = editPopupForm.querySelector('.popup__input_type_name');
 export const jobInput = editPopupForm.querySelector('.popup__input_type_job');
 export const addButton = document.querySelector('.profile__add-button');
 export const addPopupForm = document.querySelector('#addPopupForm');
+export const editAvatarPopupForm = document.querySelector('#editAvatarPopupForm');
+export const editAvatarButton = document.querySelector('.profile__edit-avatar');
+
