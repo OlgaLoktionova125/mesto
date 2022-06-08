@@ -5,5 +5,3 @@
 При создании проекта, использовались технологии HTML, CSS и JS.
 
 [Ссылка на проект](https://olgaloktionova125.github.io/mesto/)
-
-https://olgaloktionova125.github.io/mesto/
