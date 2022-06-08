@@ -28,8 +28,10 @@ export default class PopupWithForm extends Popup {
         const text = this._submitButton.textContent;
         if (isLoading) {
             this._submitButton.textContent = 'Сохранение...';
+            this._submitButton.classList.add('popup__submit-button_saving');
         } else {
             this._submitButton.textContent = this._textContent;
+            this._submitButton.classList.remove('popup__submit-button_saving');
         }
     }
 

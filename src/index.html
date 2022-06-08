@@ -68,13 +68,15 @@
         <div class="popup" id="deleteCard">
             <div class="popup__container">
                 <h2 class="popup__heading">Вы уверены?</h2>
-                <button aria-label="закрыть" class="popup__close-button" type="button"></button>                
-                <button aria-label="подтверждение" class="popup__submit-button popup__delete-button" type="submit">Да</button>                
+                <button aria-label="закрыть" class="popup__close-button" type="button"></button>
+                <form class="popup__form" id="deleteCardPopupForm">                
+                    <button aria-label="подтверждение" class="popup__submit-button popup__delete-button" type="submit">Да</button> 
+                </form>               
             </div>
         </div>
         <div class="popup" id="editAvatar">
             <div class="popup__container">
-                <h2 class="popup__heading">Новое место</h2>
+                <h2 class="popup__heading">Обновить аватар</h2>
                 <button aria-label="закрыть" class="popup__close-button" type="button"></button>
                 <form class="popup__form" id="editAvatarPopupForm">
                     <input class="popup__input popup__input_type_avatar" type="url" id="avatar-input" placeholder="Ссылка на аватар"  required name="avatar">
