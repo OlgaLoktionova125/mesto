@@ -22,7 +22,7 @@
 .element__place{color:#000;display:block;font-size:24px;font-weight:900;line-height:29px;margin:0;max-width:195px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%}
 .element__like{background-color:transparent;background-image:url(images/heart__disabled.87ed371465c7a6a1cd01.svg);background-position:50%;background-repeat:no-repeat;border:none;cursor:pointer;height:19px;width:22px}.element__like:hover{opacity:.5}
 .element__like_active{background-image:url(images/heart_active.fe17a515669479b1e649.svg)}
-.element__likeCount{size:13px;color:#000;line-height:15.73px;margin:3px 0 0;text-align:center}
+.element__likeCount{color:#000;font-size:13px;line-height:15.73px;margin:3px 0 0;text-align:center}
 .element__trash{background-color:transparent;background-image:url(images/Trash.823b0cf1b0b7e9cb7cad.svg);background-position:50%;background-repeat:no-repeat;border:none;cursor:pointer;height:19px;position:absolute;right:20px;top:20px;visibility:hidden;width:18px}.element__trash:hover{opacity:.5}
 .element__trash_active{visibility:visible}
 .footer{color:#545454;font-size:14px;line-height:17px;padding:48px 19px 36px}@media (min-width:890px){.footer{font-size:18px;line-height:22px;margin:0 auto;max-width:880px;padding:66px 0 60px}}
