@@ -8,8 +8,8 @@ export default class UserInfo {
     getUserInfo() {
         this._userData = {}
 
-        this._userData.userName = this._userName.textContent;
-        this._userData.userJob = this._userJob.textContent;
+        this._userData.name = this._userName.textContent;
+        this._userData.about = this._userJob.textContent;
 
         return this._userData;
     }    
@@ -17,6 +17,7 @@ export default class UserInfo {
     setUserInfo(newData) {
         this._userName.textContent = newData.name;
         this._userJob.textContent = newData.about;
-        this._userAvatar.src = newData.avatar;        
+        this._userAvatar.src = newData.avatar;
+        this._userId = newData._id;        
     }    
 }

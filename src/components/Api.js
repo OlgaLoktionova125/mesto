@@ -1,29 +1,30 @@
-const handleResponse = (res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-};
-
 export default class Api {
+  
     constructor(options) {
         this._options = options;
         this._url = options.url;
         this._headers = options.headers;
     }
 
+    _handleResponse = (res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    };
+
     getUserInfo() {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers
         })
-        .then(handleResponse);
+        .then(this._handleResponse);
     }
 
     getCardsInfo() {
         return fetch(`${this._url}/cards`, {
             headers: this._headers
       })
-        .then(handleResponse);
+        .then(this._handleResponse);
   }
 
     updateUserInfo(obj) {
@@ -35,7 +36,7 @@ export default class Api {
             about: obj.about
           })
         })
-        .then(handleResponse);    
+        .then(this._handleResponse);    
     }
 
     changeAvatar(obj) {
@@ -46,7 +47,7 @@ export default class Api {
             avatar: obj.avatar 
           })
         })
-        .then(handleResponse);
+        .then(this._handleResponse);
     }
 
     createCard(obj) {
@@ -58,7 +59,7 @@ export default class Api {
             link: obj.link
           })
         })
-        .then(handleResponse);
+        .then(this._handleResponse);
     }
 
     delCard(id) {
@@ -66,7 +67,7 @@ export default class Api {
           method: 'DELETE',
           headers: this._headers                            
       })
-      .then(handleResponse);
+      .then(this._handleResponse);
     }
 
     addCardLike(id) {
@@ -74,7 +75,7 @@ export default class Api {
           method: 'PUT',
           headers: this._headers
         })
-        .then(handleResponse);
+        .then(this._handleResponse);
     }
 
     removeCardLike(id) {
@@ -82,6 +83,6 @@ export default class Api {
         method: 'DELETE',
         headers: this._headers
       })
-      .then(handleResponse);
+      .then(this._handleResponse);
     }
 }

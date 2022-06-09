@@ -13,7 +13,7 @@
         <main class="main">
             <section class="profile">
                 <div class="profile__avatar-container">
-                    <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+                    <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
                     <button class="profile__edit-avatar"></button>
                 </div>
                 <div class="profile__info">
@@ -69,7 +69,7 @@
             <div class="popup__container">
                 <h2 class="popup__heading">Вы уверены?</h2>
                 <button aria-label="закрыть" class="popup__close-button" type="button"></button>
-                <form class="popup__form" id="deleteCardPopupForm">                
+                <form class="popup__form" name="deleteCardPopupForm" id="deleteCardPopupForm">                
                     <button aria-label="подтверждение" class="popup__submit-button popup__delete-button" type="submit">Да</button> 
                 </form>               
             </div>
@@ -78,7 +78,7 @@
             <div class="popup__container">
                 <h2 class="popup__heading">Обновить аватар</h2>
                 <button aria-label="закрыть" class="popup__close-button" type="button"></button>
-                <form class="popup__form" id="editAvatarPopupForm">
+                <form class="popup__form" name="editAvatarPopupForm" id="editAvatarPopupForm">
                     <input class="popup__input popup__input_type_avatar" type="url" id="avatar-input" placeholder="Ссылка на аватар"  required name="avatar">
                     <span class="popup__input-error avatar-input-error"></span>                    
                     <button aria-label="сохранить" class="popup__submit-button" type="submit">Сохранить</button>

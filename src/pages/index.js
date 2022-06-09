@@ -3,53 +3,64 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import {validationObj, config} from '../utils/data.js';
-import {editButton, editPopupForm, nameInput, jobInput, addButton, addPopupForm, editAvatarPopupForm, editAvatarButton} from '../utils/constants.js';
+import {editButton, addButton, editAvatarButton} from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api';
 import PopupWithConfirmation from '../components/PopupWithConfirmation';
 
-const popupEditFormValidator = new FormValidator(validationObj, editPopupForm);
-const popupAddFormValidator = new FormValidator(validationObj, addPopupForm);
-const popupEditAvatarFormValidator = new FormValidator(validationObj, editAvatarPopupForm);
-popupEditFormValidator.enableValidation();
-popupAddFormValidator.enableValidation();
-popupEditAvatarFormValidator.enableValidation();
+const formValidators = {};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement)
+    const formName = formElement.getAttribute('name')   
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationObj);
 
 const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar');
 
 const api = new Api(config);
+
 const popupDeleteCard = new PopupWithConfirmation('#deleteCard');
 popupDeleteCard.setEventListeners();
 
-function deleteCard(id) {
-  return api.delCard(id);
+function deleteCard(card) {
+  popupDeleteCard.open();
+  popupDeleteCard.setSubmitHandler(() => {
+    return api.delCard(card.getCardId())
+    .then(() => card.removeCard())
+    .then(() => popupDeleteCard.close())
+    .catch(err => console.log(err))
+  })
 }
 
 Promise.all([api.getUserInfo(), api.getCardsInfo()])
-  .then(data => {
-    const userData = data[0];
-    const cardsData = data[1];
+  .then(([userData, cardsData]) => {
+
     const userId = userData._id;
     
     userInfo.setUserInfo(userData);
 
     function createCard(item) {
-      const card = new Card(item, '#element-template', handleCardClick, deleteCard, popupDeleteCard, handleCardLikes);
-               
-        const cardElement = card.generateCard(item, userId);
-
-        cardList.setItem(cardElement);                
+      const card = new Card(item, '#element-template', handleCardClick, deleteCard, handleCardLike);               
+      const cardElement = card.generateCard(item, userId);
+      cardList.setItem(cardElement);                
     }
 
     const cardList = new Section({
       items: cardsData,
-      renderer: (item) => createCard(item, userId)}, '.elements__container');
+      renderer: (item) => createCard(item)}, '.elements__container');
 
     cardList.renderItems();
     
-    function addFormSubmitHandler(data) {  
+    function handleAddFormSubmit(data) {  
       popupAdd.renderLoading(true)
       return api.createCard(data)    
         .then(data => createCard(data))
@@ -58,12 +69,11 @@ Promise.all([api.getUserInfo(), api.getCardsInfo()])
         .finally(() => popupAdd.renderLoading(false));
     };
 
-    const popupAdd = new PopupWithForm('#add', addFormSubmitHandler);
+    const popupAdd = new PopupWithForm('#add', handleAddFormSubmit);
     popupAdd.setEventListeners();
 
     function openPopupAdd() {
-      popupAddFormValidator.toggleButtonState();
-      popupAddFormValidator.resetErrors();
+      formValidators['addPopupForm'].resetValidation();
       popupAdd.open();
     }
 
@@ -79,18 +89,30 @@ function handleCardClick(data) {
   cardPopup.open(data);  
 };
   
-function handleCardLikes(id, element) {
-  if(element.classList.contains('element__like_active')){
-    return api.removeCardLike(id);    
+function handleCardLike(card) {
+  if (card.isLiked()) {
+    return api.addCardLike(card.getCardId())
+      .then((res) => {
+          card.updateLikes(res)
+      })
+      .catch((err) => {
+          console.log(err);
+      });
   } else {
-    return api.addCardLike(id);
+    return api.removeCardLike(card.getCardId())
+      .then((res) => {
+          card.updateLikes(res)
+      })
+      .catch((err) => {
+          console.log(err);
+      });
   }  
 }
 
-const popupEditAvatar = new PopupWithForm('#editAvatar', popupEditAvatarSubmitHandler);
+const popupEditAvatar = new PopupWithForm('#editAvatar', handlePopupEditAvatarSubmit);
 popupEditAvatar.setEventListeners();
 
-function popupEditAvatarSubmitHandler(data) {
+function handlePopupEditAvatarSubmit(data) {
   popupEditAvatar.renderLoading(true);
   return api.changeAvatar(data)
     .then(data => userInfo.setUserInfo(data))
@@ -99,9 +121,14 @@ function popupEditAvatarSubmitHandler(data) {
     .finally(() =>popupEditAvatar.renderLoading(false));
 }
 
-editAvatarButton.addEventListener('click', ()=> popupEditAvatar.open());
+function openPopupEditAvatar() {
+  formValidators['editAvatarPopupForm'].resetValidation();  
+  popupEditAvatar.open();
+}
 
-function editFormSubmitHandler(data) {
+editAvatarButton.addEventListener('click', openPopupEditAvatar);
+
+function handleEditFormSubmit(data) {
   popupEdit.renderLoading(true);
   return api.updateUserInfo(data)
     .then(data => {
@@ -112,14 +139,13 @@ function editFormSubmitHandler(data) {
     .finally(() =>popupEdit.renderLoading(false));   
 };
 
-const popupEdit = new PopupWithForm('#edit', editFormSubmitHandler);
+const popupEdit = new PopupWithForm('#edit', handleEditFormSubmit);
 popupEdit.setEventListeners();
 
 function openPopupEdit() {  
   const userData = userInfo.getUserInfo();
-  nameInput.value = userData.userName;
-  jobInput.value = userData.userJob;
-  popupEditFormValidator.resetErrors();
+  popupEdit.setInputValues(userData);
+  formValidators['editPopupForm'].resetValidation();
   popupEdit.open();
 };
 
